@@ -1,0 +1,45 @@
+{
+  "name": "@pdfgate/mcp-server",
+  "version": "1.0.0",
+  "description": "PDFGate MCP Server",
+  "type": "module",
+  "homepage": "https://pdfgate.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pdfgate/pdfgate-mcp-server.git"
+  },
+  "bugs": "https://github.com/pdfgate/pdfgate-mcp-server/issues",
+  "keywords": [
+    "pdfgate",
+    "pdf",
+    "mcp",
+    "model-context-protocol",
+    "pdf-generation",
+    "esignature",
+    "pdf-api"
+  ],
+  "bin": {
+    "pdfgate-mcp-server": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "pdfgate": "^1.0.7",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.8.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

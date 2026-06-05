@@ -1,0 +1,41 @@
+{
+  "manifest_version": "0.3",
+  "name": "@pdfgate/mcp-server",
+  "version": "1.0.0",
+  "description": "PDFGate MCP Server",
+  "author": {
+    "name": "PDFGate",
+    "url": "https://pdfgate.com"
+  },
+  "server": {
+    "type": "node",
+    "entry_point": "dist/index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": [
+        "${__dirname}/dist/index.js"
+      ],
+      "env": {
+        "PDFGATE_API_KEY": "${user_config.api_key}",
+        "PDFGATE_WEBHOOK_PORT": "${user_config.webhook_port}"
+      }
+    }
+  },
+  "user_config": {
+    "api_key": {
+      "type": "string",
+      "title": "API Key",
+      "description": "Your PDFGate API key (starts with live_ for production or test_ for sandbox)",
+      "sensitive": true,
+      "required": true
+    },
+    "webhook_port": {
+      "type": "number",
+      "title": "Webhook Port",
+      "description": "Port for the local webhook listener",
+      "required": false,
+      "default": 3599
+    }
+  },
+  "license": "MIT"
+}
