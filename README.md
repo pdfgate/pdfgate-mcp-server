@@ -1,6 +1,6 @@
 # PDFGate MCP Server
 
-Model Context Protocol (MCP) server for the [PDFGate](https://pdfgate.com) API. Enables AI assistants to generate PDFs, manage documents, handle e-signatures, and receive real-time envelope events.
+Model Context Protocol (MCP) server for the [PDFGate](https://pdfgate.com) API. Enables AI assistants to generate PDFs, manage documents and handle e-signatures.
 
 ## Installation
 
