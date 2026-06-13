@@ -1,12 +1,13 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "com.pdfgate/mcp-server",
-  "description": "MCP server for the PDFGate API. Enables AI assistants to generate PDFs, manage documents and handle e-signatures.",
+  "description": "MCP server for the PDFGate API. Generate PDFs, manage documents and handle e-signatures.",
   "repository": {
     "url": "https://github.com/pdfgate/pdfgate-mcp-server",
     "source": "github"
   },
-  "version": "1.0.1",
+  "websiteUrl": "https://pdfgate.com",
+  "version": "1.0.2",
   "packages": [
     {
       "registryType": "npm",
