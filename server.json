@@ -1,0 +1,32 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "com.pdfgate/mcp-server",
+  "description": "MCP server for the PDFGate API. Enables AI assistants to generate PDFs, manage documents and handle e-signatures.",
+  "repository": {
+    "url": "https://github.com/pdfgate/pdfgate-mcp-server",
+    "source": "github"
+  },
+  "version": "1.0.1",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "@pdfgate/mcp-server",
+      "version": "1.0.1",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "PDFGATE_API_KEY",
+          "description": "Your PDFGate API key (starts with live_ for production or test_ for sandbox)",
+          "required": true
+        },
+        {
+          "name": "PDFGATE_WEBHOOK_PORT",
+          "description": "Port for the local webhook listener (default: 3599)",
+          "required": false
+        }
+      ]
+    }
+  ]
+}

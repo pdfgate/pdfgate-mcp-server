@@ -1,6 +1,6 @@
 {
   "name": "@pdfgate/mcp-server",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "PDFGate MCP Server",
   "type": "module",
   "homepage": "https://pdfgate.com",
@@ -41,5 +41,6 @@
   },
   "engines": {
     "node": ">=18.0.0"
-  }
+  },
+  "mcpName": "com.pdfgate/mcp-server"
 }
