@@ -1,15 +1,7 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
-import { httpPost } from "../http.js";
+import { getClient } from "../client.js";
 import { addSecret } from "../webhooks/secrets.js";
-
-interface WebhookResponse {
-  id: string;
-  url: string;
-  eventTypes: string[];
-  description?: string;
-  secret: string;
-}
 
 export function register(server: McpServer): void {
   server.tool(
@@ -32,8 +24,12 @@ export function register(server: McpServer): void {
     },
     async ({ url, eventTypes, description }) => {
       try {
-        const result = await httpPost<WebhookResponse>("/webhook", { url, eventTypes, description });
-        addSecret(result.secret);
+        const result = await getClient().createWebhook({
+          url,
+          eventTypes,
+          description,
+        } as Parameters<ReturnType<typeof getClient>["createWebhook"]>[0]);
+        if (result.secret) addSecret(result.secret);
         return { content: [{ type: "text", text: JSON.stringify(result, null, 2) }] };
       } catch (err: unknown) {
         const msg = err instanceof Error ? err.message : String(err);

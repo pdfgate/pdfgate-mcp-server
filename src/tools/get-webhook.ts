@@ -4,14 +4,14 @@ import { getClient } from "../client.js";
 
 export function register(server: McpServer): void {
   server.tool(
-    "extract_pdf_form_data",
-    "Extract form field values from a fillable PDF. Returns a JSON object mapping field names to their values.",
+    "get_webhook",
+    "Retrieve a PDFGate webhook subscription by its ID.",
     {
-      documentId: z.string().describe("The document ID of the fillable PDF"),
+      webhookId: z.string().describe("The webhook ID"),
     },
-    async ({ documentId }) => {
+    async ({ webhookId }) => {
       try {
-        const result = await getClient().extractPdfFormData({ documentId });
+        const result = await getClient().getWebhook({ id: webhookId });
         return { content: [{ type: "text", text: JSON.stringify(result, null, 2) }] };
       } catch (err: unknown) {
         const msg = err instanceof Error ? err.message : String(err);

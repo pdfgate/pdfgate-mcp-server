@@ -4,15 +4,15 @@ import { getClient } from "../client.js";
 
 export function register(server: McpServer): void {
   server.tool(
-    "delete_document",
-    "Delete a PDFGate document.",
+    "extract_form_data",
+    "Extract form field values from a fillable PDF. Returns a JSON object mapping field names to their values.",
     {
-      documentId: z.string().describe("The document ID to delete"),
+      documentId: z.string().describe("The document ID of the fillable PDF"),
     },
     async ({ documentId }) => {
       try {
-        await getClient().deleteDocument({ documentId });
-        return { content: [{ type: "text", text: `Document ${documentId} deleted successfully.` }] };
+        const result = await getClient().extractPdfFormData({ documentId });
+        return { content: [{ type: "text", text: JSON.stringify(result, null, 2) }] };
       } catch (err: unknown) {
         const msg = err instanceof Error ? err.message : String(err);
         return { content: [{ type: "text", text: `Error: ${msg}` }], isError: true };

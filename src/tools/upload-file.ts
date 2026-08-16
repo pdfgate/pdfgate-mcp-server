@@ -6,7 +6,7 @@ import { getClient } from "../client.js";
 
 export function register(server: McpServer): void {
   server.tool(
-    "upload_pdf",
+    "upload_file",
     "Upload a PDF to PDFGate so it can be referenced by other operations. Provide either 'filePath' (local path) or 'url'.",
     {
       filePath: z.string().optional().describe("Absolute local path to the PDF file to upload"),

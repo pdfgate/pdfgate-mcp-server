@@ -20,6 +20,66 @@ Add the following to your MCP client configuration:
 }
 ```
 
+## Hosted server (remote)
+
+If you prefer not to run anything locally, we also host the MCP server, so you can
+connect straight to it — no `npx`, no local process. Point any client that
+supports remote (Streamable HTTP) MCP servers at:
+
+```
+https://mcp.pdfgate.com/server
+```
+
+You can authenticate in two ways.
+
+### Option 1 — OAuth
+
+For clients that support remote MCP servers with OAuth (such as Claude and
+ChatGPT), add the server by its URL alone and sign in through your browser. There
+is no key to copy or store: the client registers itself, sends you to the PDFGate
+dashboard to approve access, and receives a scoped token automatically.
+
+```json
+{
+  "mcpServers": {
+    "pdfgate": {
+      "type": "http",
+      "url": "https://mcp.pdfgate.com/server"
+    }
+  }
+}
+```
+
+Many clients let you add this from their UI instead of a config file — for
+example, in Claude: **Settings → Connectors → Add custom connector**, then enter
+the URL above. OAuth sessions run against your production account; for the
+sandbox, use an `X-API-KEY` with a `test_` key.
+
+### Option 2 — API key
+
+Pass your key in the `X-API-KEY` header:
+
+```json
+{
+  "mcpServers": {
+    "pdfgate": {
+      "type": "http",
+      "url": "https://mcp.pdfgate.com/server",
+      "headers": {
+        "X-API-KEY": "your_api_key_here"
+      }
+    }
+  }
+}
+```
+
+`live_` keys use production and `test_` keys use the sandbox — the environment is
+selected automatically from the key.
+
+The hosted server provides the full PDFGate toolset (PDF generation, processing,
+form fields, e-signatures and webhooks). The exact client config field names
+(e.g. `type` / `transport`, `headers`) may vary by MCP client.
+
 ## Getting an API key
 
 Sign up at [pdfgate.com](https://pdfgate.com) to get your API key.
@@ -34,11 +94,13 @@ Sign up at [pdfgate.com](https://pdfgate.com) to get your API key.
 | Tool | Description |
 |---|---|
 | `generate_pdf` | Generate a PDF from a URL or raw HTML |
-| `upload_pdf` | Upload a local PDF file or from a URL |
+| `upload_file` | Upload a local PDF file or from a URL |
 | `get_document` | Retrieve document metadata and a fresh download URL |
+| `download_file` | Download the raw PDF bytes of a stored document |
 | `delete_document` | Delete a document |
 | `flatten_pdf` | Flatten an interactive PDF into a static, non-editable file |
-| `extract_pdf_form_data` | Extract form field values from a fillable PDF |
+| `extract_form_data` | Extract form field values from a fillable PDF |
+| `add_form_fields` | Add interactive form fields to a PDF (placeholder tags or explicit positions) |
 | `compress_pdf` | Compress a PDF to reduce file size |
 | `protect_pdf` | Encrypt a PDF with a password and permission restrictions |
 | `watermark_pdf` | Apply a text or image watermark to a PDF |
@@ -56,6 +118,7 @@ Sign up at [pdfgate.com](https://pdfgate.com) to get your API key.
 | Tool | Description |
 |---|---|
 | `create_webhook` | Subscribe to PDFGate events |
+| `get_webhook` | Retrieve a webhook subscription by ID |
 | `delete_webhook` | Remove a webhook subscription |
 
 ## Webhook Triggers

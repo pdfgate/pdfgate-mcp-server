@@ -1,6 +1,6 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
-import { httpDelete } from "../http.js";
+import { getClient } from "../client.js";
 
 export function register(server: McpServer): void {
   server.tool(
@@ -11,7 +11,7 @@ export function register(server: McpServer): void {
     },
     async ({ webhookId }) => {
       try {
-        await httpDelete(`/webhook/${webhookId}`);
+        await getClient().deleteWebhook({ id: webhookId });
         return { content: [{ type: "text", text: `Webhook ${webhookId} deleted successfully.` }] };
       } catch (err: unknown) {
         const msg = err instanceof Error ? err.message : String(err);

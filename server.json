@@ -7,12 +7,12 @@
     "source": "github"
   },
   "websiteUrl": "https://pdfgate.com",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "packages": [
     {
       "registryType": "npm",
       "identifier": "@pdfgate/mcp-server",
-      "version": "1.0.1",
+      "version": "1.1.0",
       "transport": {
         "type": "stdio"
       },
@@ -26,6 +26,20 @@
           "name": "PDFGATE_WEBHOOK_PORT",
           "description": "Port for the local webhook listener (default: 3599)",
           "required": false
+        }
+      ]
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.pdfgate.com/server",
+      "headers": [
+        {
+          "name": "X-API-KEY",
+          "description": "Your PDFGate API key (live_ for production, test_ for sandbox). Optional: omit to authenticate with OAuth instead.",
+          "isRequired": false,
+          "isSecret": true
         }
       ]
     }
