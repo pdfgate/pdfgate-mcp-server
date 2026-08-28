@@ -1,5 +1,7 @@
 # PDFGate MCP Server
 
+[![smithery badge](https://smithery.ai/badge/pdfgate/pdfgate-mcp)](https://smithery.ai/servers/pdfgate/pdfgate-mcp)
+
 Model Context Protocol (MCP) server for the [PDFGate](https://pdfgate.com) API. Enables AI assistants to generate PDFs, manage documents and handle e-signatures.
 
 ## Installation
