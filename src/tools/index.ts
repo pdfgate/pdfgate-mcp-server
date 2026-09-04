@@ -13,6 +13,8 @@ import { register as registerDownloadFile } from "./download-file.js";
 import { register as registerCreateEnvelope } from "./create-envelope.js";
 import { register as registerSendEnvelope } from "./send-envelope.js";
 import { register as registerGetEnvelope } from "./get-envelope.js";
+import { register as registerVoidEnvelope } from "./void-envelope.js";
+import { register as registerDeleteEnvelope } from "./delete-envelope.js";
 import { register as registerCreateWebhook } from "./create-webhook.js";
 import { register as registerGetWebhook } from "./get-webhook.js";
 import { register as registerDeleteWebhook } from "./delete-webhook.js";
@@ -32,6 +34,8 @@ export function registerTools(server: McpServer): void {
   registerCreateEnvelope(server);
   registerSendEnvelope(server);
   registerGetEnvelope(server);
+  registerVoidEnvelope(server);
+  registerDeleteEnvelope(server);
   registerCreateWebhook(server);
   registerGetWebhook(server);
   registerDeleteWebhook(server);

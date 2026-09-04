@@ -1,7 +1,7 @@
 {
   "manifest_version": "0.3",
   "name": "@pdfgate/mcp-server",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "PDFGate MCP Server",
   "author": {
     "name": "PDFGate",

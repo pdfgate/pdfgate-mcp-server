@@ -112,6 +112,8 @@ Sign up at [pdfgate.com](https://pdfgate.com) to get your API key.
 | `create_envelope` | Create a signing envelope from one or more documents |
 | `send_envelope` | Send a created envelope to recipients |
 | `get_envelope` | Get the current status of an envelope |
+| `void_envelope` | Void an envelope so it can no longer be signed |
+| `delete_envelope` | Delete an envelope and remove its signed documents |
 
 ### Webhook Management
 
@@ -136,6 +138,9 @@ Supported events:
 | `envelope.completed` | All documents in the envelope have been signed |
 | `envelope.expired` | The envelope expired before all documents were signed |
 | `envelope.document.completed` | A single document inside the envelope has been fully signed |
+| `envelope.recipient.signed` | A recipient has signed a document in the envelope |
+| `envelope.voided` | The envelope was voided by the sender |
+| `envelope.deleted` | The envelope was deleted |
 
 Received events are available via the `pdfgate://events` MCP resource and pushed to the client in real time.
 
