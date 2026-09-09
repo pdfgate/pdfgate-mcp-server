@@ -114,6 +114,16 @@ Sign up at [pdfgate.com](https://pdfgate.com) to get your API key.
 | `get_envelope` | Get the current status of an envelope |
 | `void_envelope` | Void an envelope so it can no longer be signed |
 | `delete_envelope` | Delete an envelope and remove its signed documents |
+| `create_embed_link` | Create a short-lived signing link for an embedded recipient |
+
+### Recipients
+
+| Tool | Description |
+|---|---|
+| `create_recipient` | Store a recipient for reuse across envelopes |
+| `list_recipients` | List stored recipients by email |
+| `get_recipient` | Retrieve a stored recipient by ID |
+| `update_recipient` | Update a stored recipient's name or metadata |
 
 ### Webhook Management
 

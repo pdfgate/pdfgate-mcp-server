@@ -4,14 +4,14 @@ import { getClient } from "../client.js";
 
 export function register(server: McpServer): void {
   server.tool(
-    "get_envelope",
-    "Retrieve the current state of an envelope including its status, document progress, and per-recipient signing status. Each recipient carries an embedded boolean; embedded recipients have no signing link — mint one with create_embed_link instead.",
+    "get_recipient",
+    "Retrieve a stored recipient by ID.",
     {
-      envelopeId: z.string().describe("The envelope ID to retrieve"),
+      recipientId: z.string().describe("The recipient ID"),
     },
-    async ({ envelopeId }) => {
+    async ({ recipientId }) => {
       try {
-        const result = await getClient().getEnvelope({ id: envelopeId });
+        const result = await getClient().getRecipient({ id: recipientId });
         return { content: [{ type: "text", text: JSON.stringify(result, null, 2) }] };
       } catch (err: unknown) {
         const msg = err instanceof Error ? err.message : String(err);

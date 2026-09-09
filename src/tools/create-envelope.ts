@@ -3,11 +3,21 @@ import { z } from "zod";
 import { getClient } from "../client.js";
 
 const recipientSchema = z.object({
-  email: z.string().email().describe("Recipient email address"),
-  name: z.string().describe("Recipient display name"),
+  recipientId: z
+    .string()
+    .optional()
+    .describe("ID of a stored recipient to reuse. Provide either recipientId or email and name, never both"),
+  email: z.string().email().optional().describe("Recipient email address. Required when recipientId is not provided"),
+  name: z.string().optional().describe("Recipient display name. Required when recipientId is not provided"),
   role: z.string().optional().describe("Recipient role label"),
   reminderIntervalDays: z.number().int().optional().describe("Days between reminder emails"),
   reminderAttempts: z.number().int().min(1).max(10).optional().describe("Maximum number of reminder emails (defaults to 5)"),
+  embedded: z
+    .boolean()
+    .optional()
+    .describe(
+      "Embedded recipients sign inside your own application through a short-lived embed link and receive no emails from PDFGate"
+    ),
 });
 
 const documentSchema = z.object({
@@ -21,7 +31,7 @@ const documentSchema = z.object({
 export function register(server: McpServer): void {
   server.tool(
     "create_envelope",
-    "Create a signing envelope from one or more existing PDFGate documents. Returns an envelope in 'created' status; call send_envelope to dispatch signing emails.",
+    "Create a signing envelope from one or more existing PDFGate documents. Each recipient is given either as email and name or as the recipientId of a stored recipient. Recipients marked embedded sign inside your application via create_embed_link and receive no emails. Returns an envelope in 'created' status; call send_envelope to dispatch signing emails.",
     {
       documents: z.array(documentSchema).min(1).describe("Documents to include in the envelope"),
       requesterName: z.string().describe("Name of the user or system creating the envelope"),
