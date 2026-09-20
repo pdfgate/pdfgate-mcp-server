@@ -5,7 +5,7 @@ import { getClient } from "../client.js";
 export function register(server: McpServer): void {
   server.tool(
     "create_embed_link",
-    "Create a short-lived signing URL for an embedded recipient, to be rendered in an iframe inside your application. The envelope must be in 'in_progress' status and the link expires after 10 minutes, so create it when the signer is ready (one link per signing session). When the session ends the iframe redirects to returnUrl with event (signing_complete, voided, expired or not_found), envelopeId, documentId and recipientId appended as query parameters; existing returnUrl query parameters are preserved.",
+    "Create a short-lived signing URL for an embedded recipient, to be rendered in an iframe inside your application. The envelope must be in 'in_progress' status and the link expires after 10 minutes, so create it when the signer is ready (one link per signing session). On documents with a signingOrder the link can only be created once it is the recipient's turn; the envelope.recipient.activated webhook event signals that moment. When the session ends the iframe redirects to returnUrl with event (signing_complete, voided, expired or not_found), envelopeId, documentId and recipientId appended as query parameters; existing returnUrl query parameters are preserved.",
     {
       envelopeId: z.string().describe("The envelope ID"),
       documentId: z.string().describe("The envelope document ID (sourceDocumentId)"),

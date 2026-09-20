@@ -1,6 +1,6 @@
 {
   "name": "@pdfgate/mcp-server",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "PDFGate MCP Server",
   "type": "module",
   "homepage": "https://pdfgate.com",
@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.29.0",
-    "pdfgate": "^1.2.1",
+    "pdfgate": "^1.3.0",
     "zod": "^3.24.0"
   },
   "devDependencies": {

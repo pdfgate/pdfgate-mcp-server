@@ -12,6 +12,14 @@ const recipientSchema = z.object({
   role: z.string().optional().describe("Recipient role label"),
   reminderIntervalDays: z.number().int().optional().describe("Days between reminder emails"),
   reminderAttempts: z.number().int().min(1).max(10).optional().describe("Maximum number of reminder emails (defaults to 5)"),
+  signingOrder: z
+    .number()
+    .int()
+    .min(1)
+    .optional()
+    .describe(
+      "Signing order of the recipient, starting from 1. Recipients sign one after another in this order and a recipient is activated once everyone with a lower value has signed. Recipients with the same value can sign in parallel. Provide it for every recipient of a document or for none. Omitted, all recipients can sign immediately"
+    ),
   embedded: z
     .boolean()
     .optional()
@@ -31,7 +39,7 @@ const documentSchema = z.object({
 export function register(server: McpServer): void {
   server.tool(
     "create_envelope",
-    "Create a signing envelope from one or more existing PDFGate documents. Each recipient is given either as email and name or as the recipientId of a stored recipient. Recipients marked embedded sign inside your application via create_embed_link and receive no emails. Returns an envelope in 'created' status; call send_envelope to dispatch signing emails.",
+    "Create a signing envelope from one or more existing PDFGate documents. Each recipient is given either as email and name or as the recipientId of a stored recipient. Recipients marked embedded sign inside your application via create_embed_link and receive no emails. Use signingOrder to make recipients sign in sequence. Returns an envelope in 'created' status; call send_envelope to dispatch signing emails.",
     {
       documents: z.array(documentSchema).min(1).describe("Documents to include in the envelope"),
       requesterName: z.string().describe("Name of the user or system creating the envelope"),
