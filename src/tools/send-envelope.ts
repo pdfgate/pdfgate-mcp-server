@@ -5,7 +5,7 @@ import { getClient } from "../client.js";
 export function register(server: McpServer): void {
   server.tool(
     "send_envelope",
-    "Send a created envelope to its recipients. PDFGate dispatches signing emails with secure, OTP-protected links that stay valid until the envelope expires. Embedded recipients receive no email; create their signing links with create_embed_link after sending.",
+    "Send a created envelope to its recipients. PDFGate dispatches signing emails with secure, OTP-protected links that stay valid until the envelope expires. Embedded recipients receive no email; create their signing links with create_embed_link after sending. On documents with a signingOrder only the first recipients are emailed; later recipients are activated as earlier ones sign.",
     {
       envelopeId: z.string().describe("The envelope ID to send"),
     },

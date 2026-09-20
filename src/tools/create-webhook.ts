@@ -18,6 +18,7 @@ export function register(server: McpServer): void {
             "envelope.voided",
             "envelope.deleted",
             "envelope.recipient.signed",
+            "envelope.recipient.activated",
             "envelope.document.completed",
           ])
         )
