@@ -124,6 +124,9 @@ Sign up at [pdfgate.com](https://pdfgate.com) to get your API key.
 | `list_recipients` | List stored recipients by email |
 | `get_recipient` | Retrieve a stored recipient by ID |
 | `update_recipient` | Update a stored recipient's name or metadata |
+| `delete_recipient` | Delete a stored recipient (personal data removed; blocked while a stored signature is active or pending) |
+| `request_recipient_signature` | Email a recipient an enrolment link to store a reusable signature for automatic signing |
+| `remove_recipient_signature` | Remove a recipient's stored signature or cancel a pending enrolment |
 
 ### Webhook Management
 
@@ -151,6 +154,8 @@ Supported events:
 | `envelope.recipient.signed` | A recipient has signed a document in the envelope |
 | `envelope.voided` | The envelope was voided by the sender |
 | `envelope.deleted` | The envelope was deleted |
+| `recipient.signature.enrolled` | A recipient completed the enrolment and stored a reusable signature for automatic signing |
+| `recipient.signature.revoked` | A recipient's stored signature was removed |
 
 Received events are available via the `pdfgate://events` MCP resource and pushed to the client in real time.
 

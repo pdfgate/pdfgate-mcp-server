@@ -26,6 +26,18 @@ const recipientSchema = z.object({
     .describe(
       "Embedded recipients sign inside your own application through a short-lived embed link and receive no emails from PDFGate"
     ),
+  autoSign: z
+    .boolean()
+    .optional()
+    .describe(
+      "Automatic signing. Applies the stored signature of the referenced recipient on their behalf when their turn to sign comes, with no signing session or email. Requires recipientId pointing to a recipient with an active stored signature (request it with the request_recipient_signature tool) and cannot be combined with embedded. Every required field of the recipient must already have a value before the document is sent, except signature and auto-filled date fields"
+    ),
+  sendSignedCopy: z
+    .boolean()
+    .optional()
+    .describe(
+      "Whether to email this recipient the signed document when the document completes. Defaults to true for recipients who sign through the emailed signing link and false for embedded and automatic signing recipients"
+    ),
 });
 
 const documentSchema = z.object({
@@ -39,7 +51,7 @@ const documentSchema = z.object({
 export function register(server: McpServer): void {
   server.tool(
     "create_envelope",
-    "Create a signing envelope from one or more existing PDFGate documents. Each recipient is given either as email and name or as the recipientId of a stored recipient. Recipients marked embedded sign inside your application via create_embed_link and receive no emails. Use signingOrder to make recipients sign in sequence. Returns an envelope in 'created' status; call send_envelope to dispatch signing emails.",
+    "Create a signing envelope from one or more existing PDFGate documents. Each recipient is given either as email and name or as the recipientId of a stored recipient. A recipient signs through the hosted flow (emailed link), embedded signing (embedded: sign inside your application via create_embed_link, no emails) or automatic signing (autoSign: the stored signature of a recipient enrolled with request_recipient_signature is applied on their behalf, no signing session). Use signingOrder to make recipients sign in sequence. Returns an envelope in 'created' status; call send_envelope to dispatch signing emails.",
     {
       documents: z.array(documentSchema).min(1).describe("Documents to include in the envelope"),
       requesterName: z.string().describe("Name of the user or system creating the envelope"),

@@ -20,6 +20,8 @@ export function register(server: McpServer): void {
             "envelope.recipient.signed",
             "envelope.recipient.activated",
             "envelope.document.completed",
+            "recipient.signature.enrolled",
+            "recipient.signature.revoked",
           ])
         )
         .min(1)
